@@ -278,13 +278,6 @@ namespace APP_WPF_InstrumentControl
         {
             if (TB_Index.Text.Length < 1) { TB_Index.Text = "Инвентарный номер"; }
         }
-        /*
-         TB_Name.Text = "Название";
-         TB_Category.Text = "Категория";
-         TB_Type.Text = "Тип инструмента";
-         TB_Index.Text = "Инвентарный номер";
-         
-         */
 
         private void TB_Type_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -305,9 +298,9 @@ namespace APP_WPF_InstrumentControl
         {
             this.Close();
             AuthWindow window = new AuthWindow();
-
+            window.TB_Name.Text = GD.CompName;
+            window.TB_INN.Text = GD.CompINN;
             window.ShowDialog();
-            
             
         }
 
