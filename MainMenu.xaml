@@ -6,12 +6,12 @@
         xmlns:local="clr-namespace:APP_WPF_InstrumentControl"
         mc:Ignorable="d"
         Background="Gray"
-        Title="MainMenu" Height="550" Width="820" BorderBrush="Transparent" ResizeMode="NoResize">
+        Title="MainMenu" Height="650" Width="820" BorderBrush="Transparent" ResizeMode="NoResize">
     <Grid>
         <Image Source="C:\Users\user\source\repos\APP_WPF_InstrumentControl\obj\Assets\аварийная лента.png" VerticalAlignment="Top" HorizontalAlignment="Center" Height="25" Width="850" />
 
         <TextBlock x:Name="TB_Head" Text="" FontSize="20" FontWeight="DemiBold" TextWrapping="Wrap" Margin="17,30,174,395"/>
-        <Border CornerRadius="15" Margin="609,0,0,467" Background="Red" Height="30" Width="180" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+        <Border CornerRadius="15" Margin="615,0,0,574" Background="Red" Height="30" Width="180" VerticalAlignment="Bottom" HorizontalAlignment="Left">
             <Button x:Name="BT_Auth" Background="Transparent"  BorderBrush="Transparent" Content="Сменить аккаунт" FontWeight="DemiBold" FontSize="16" Click="BT_Auth_Click" ></Button>
         </Border>
 
@@ -24,13 +24,13 @@
          AlternatingRowBackground="#F5F5F5"
          BorderBrush="#BDBDBD"
          AutoGenerateColumns="False"
-         IsReadOnly="True" Margin="100,92,100,142">
+         IsReadOnly="True" Margin="0,107,110,0" VerticalAlignment="Top" HorizontalAlignment="Right">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="*" Foreground="#424242"/>
-                <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="*"/>
-                <DataGridTextColumn Header="Тип инструмента" Binding="{Binding Type}" Width="*"/>
-                <DataGridTextColumn Header="Инвентарный номер" Binding="{Binding Index}" Width="*"/>
-                <DataGridTemplateColumn>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="24*" Foreground="#424242"/>
+                <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="24*"/>
+                <DataGridTextColumn Header="Тип инструмента" Binding="{Binding Type}" Width="24*"/>
+                <DataGridTextColumn Header="Инвентарный номер" Binding="{Binding Index}" Width="24*" Foreground="Red"/>
+                <DataGridTemplateColumn Width="4*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button Content="X" 
@@ -45,6 +45,16 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <Label Content="Выберите категорию" Width="150" Height="30" Margin="0,0,610,173" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Label>
+        <ComboBox Name="CB_Category" Width="150" Height="30" Margin="0,0,610,150" VerticalAlignment="Bottom" HorizontalAlignment="Right"></ComboBox>
+        <Label Content="Выберите тип" Width="150" Height="30" Margin="0,0,450,173" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Label>
+        <ComboBox Name="CB_Type" Width="150" Height="30" Margin="0,0,450,150" VerticalAlignment="Bottom" HorizontalAlignment="Right"></ComboBox>
+        <Label Content="Выберите номер" Width="150" Height="30" Margin="0,0,290,173" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Label>
+        <ComboBox Name="CB_Index" Width="150" Height="30" Margin="0,0,290,150" VerticalAlignment="Bottom" HorizontalAlignment="Right"></ComboBox>
+
+        <Button x:Name="BT_Filter" Content="ВЫБРАТЬ" FontWeight="Bold" Margin="615,0,0,150" Height="30" Width="120" Background="Orange" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="BT_Filter_Click"></Button>
+        <Button x:Name="BT_ClearFilter" Content="X" FontWeight="Bold" Margin="735,0,0,150" Height="30" Width="30" Background="red" VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="BT_ClearFilter_Click"></Button>
+
         <TextBox x:Name="TB_Name" GotFocus="TB_Name_GotFocus" LostFocus="TB_Name_LostFocus"
          Width="470" Height="30"
          Background="White"
@@ -52,7 +62,7 @@
          FontSize="14"
          Padding="5"
          BorderThickness="0"
-         Text="Название" Margin="50,0,280,88" VerticalAlignment="Bottom"/>
+         Text="Название" Margin="0,0,290,89" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
         <TextBox x:Name="TB_Category" GotFocus="TB_Category_GotFocus" LostFocus="TB_Category_LostFocus"
          Width="150" Height="30"
@@ -61,8 +71,8 @@
          FontSize="14"
          Padding="5"
          BorderThickness="0"
-         Margin="50,451,600,0"
-         Text="Категория" VerticalAlignment="Top"/>
+         Margin="0,0,610,54"
+         Text="Категория" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
         <TextBox x:Name="TB_Type" GotFocus="TB_Type_GotFocus" LostFocus="TB_Type_LostFocus"
          Width="150" Height="30"
@@ -71,8 +81,8 @@
          FontSize="14"
          Padding="5"
          BorderThickness="0"
-         Margin="210,451,440,0"
-         Text="Тип инструмента" VerticalAlignment="Top"/>
+         Margin="0,0,450,54"
+         Text="Тип инструмента" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
         <TextBox x:Name="TB_Index" GotFocus="TB_Index_GotFocus" LostFocus="TB_Index_LostFocus"
          Width="150" Height="30"
@@ -81,11 +91,11 @@
          FontSize="14"
          Padding="5"
          BorderThickness="0"
-         Margin="370,451,280,0"
-         Text="Инвентарный номер" VerticalAlignment="Top"/>
+         Margin="0,0,290,54"
+         Text="Инвентарный номер" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
-        <Button x:Name="BT_AddInstrument" Click="AddInstrument_Click" Content="ДОБАВИТЬ" FontWeight="Bold" Margin="605,416,45,0" Height="30" Width="150" Background="red" VerticalAlignment="Top"></Button>
-        <Button x:Name="BT_EditInstrument" Click="EditInstrument_Click" Content="ИЗМЕНИТЬ" FontWeight="Bold" Margin="605,451,45,0" Height="30" Width="150" VerticalAlignment="Top"></Button>
+        <Button x:Name="BT_AddInstrument" Click="AddInstrument_Click" Content="ДОБАВИТЬ" FontWeight="Bold" Margin="615,0,0,54" Height="30" Width="150" Background="red" VerticalAlignment="Bottom" HorizontalAlignment="Left"></Button>
+        <Button x:Name="BT_EditInstrument" Click="EditInstrument_Click" Content="ИЗМЕНИТЬ" FontWeight="Bold" Margin="615,0,0,89" Height="30" Width="150" VerticalAlignment="Bottom" HorizontalAlignment="Left"></Button>
 
 
 

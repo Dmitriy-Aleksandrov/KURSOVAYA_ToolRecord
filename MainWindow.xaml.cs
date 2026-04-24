@@ -22,14 +22,11 @@ namespace APP_WPF_InstrumentControl
     {
         public MainWindow()
         {
+            
             InitializeComponent();
+            MainMenu win = new MainMenu();
+            win.ShowDialog();
         }
-
-        
-        //private void SBC(object sender, RoutedEventArgs e)
-        //{
-        //    MessageBox.Show("OK da");
-        //}
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {

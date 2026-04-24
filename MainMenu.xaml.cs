@@ -23,11 +23,13 @@ namespace APP_WPF_InstrumentControl
         private int UpdatingInstrumentId;
         private Tool_RecordEntities db;
         private static List<Instrument> instrumentList = new List<Instrument>();
+        private static List<Instrument> filteredList = new List<Instrument>();
         public MainMenu()
         {
             db = new Tool_RecordEntities();
             InitializeComponent();
             FillDataList();
+
             TB_Head.Text = $"Перечень инструментов по адресу: {AuthWindow.addressname}"; 
         }
         private void FillDataList()
@@ -37,6 +39,9 @@ namespace APP_WPF_InstrumentControl
             {
                 instrumentList = db.Instruments.Where(s => s.FirmId == GD.CompID && s.AddressId == GD.AddrID).ToList();
                 DG_Instruments.ItemsSource = instrumentList;
+                CB_Category.ItemsSource = instrumentList.Select(i => i.Category).Distinct();
+                CB_Type.ItemsSource = instrumentList.Select(i => i.Type).Distinct();
+                CB_Index.ItemsSource = instrumentList.Select(i => i.Index).Distinct();
             }
             catch (Exception ex)
             {
@@ -95,6 +100,7 @@ namespace APP_WPF_InstrumentControl
             try
             {
                 db.Instruments.Remove(selectedInstrument);
+                ToolLogger.OnToolDeleted(selectedInstrument);
                 db.SaveChanges();
                 MessageBox.Show("Вы удалили инструмент");
                 FillDataList();
@@ -156,6 +162,7 @@ namespace APP_WPF_InstrumentControl
                     };
 
                     db.Instruments.Add(newInstrument);
+                    ToolLogger.OnToolAdded(newInstrument);
                     FillDataList();
                     db.SaveChanges();
                     MessageBox.Show("Вы добавили инструмент");
@@ -193,12 +200,14 @@ namespace APP_WPF_InstrumentControl
                 {
 
                     Instrument updatingInstrument = db.Instruments.FirstOrDefault(s => s.Id == UpdatingInstrumentId);
+                    Instrument tool1 = updatingInstrument;
                     updatingInstrument.Name = TB_Name.Text;
                     updatingInstrument.Category = TB_Category.Text;
                     updatingInstrument.Type = TB_Type.Text;
                     updatingInstrument.Index = TB_Index.Text;
-
+                    Instrument tool2 = updatingInstrument;
                     db.SaveChanges();
+                    ToolLogger.OnToolUpdated(tool1, tool2); 
                     FillDataList();
                     ClearTextBox();
 
@@ -212,6 +221,33 @@ namespace APP_WPF_InstrumentControl
                 MessageBox.Show($"Исключение типа: {ex.Message}");
                 db = new Tool_RecordEntities();
             }
+        }
+        private void BT_Filter_Click(object sender, RoutedEventArgs e)
+        {
+            filteredList = instrumentList.ToList();
+            if (CB_Category.Text.Length > 0)
+            {
+                filteredList = filteredList.Where(f => f.Category == CB_Category.Text).ToList();
+            }
+            if (CB_Type.Text.Length > 0)
+            {
+                filteredList = filteredList.Where(f => f.Category == CB_Type.Text).ToList();
+            }
+            if (CB_Index.Text.Length > 0)
+            {
+                filteredList = filteredList.Where(f => f.Category == CB_Index.Text).ToList();
+            }
+
+            DG_Instruments.ItemsSource = filteredList;
+        }
+
+        private void BT_ClearFilter_Click(object sender, RoutedEventArgs e)
+        {
+            CB_Index.Text = "";
+            CB_Category.Text = "";
+            TB_Type.Text = "";
+
+            DG_Instruments.ItemsSource = instrumentList;
         }
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -269,8 +305,12 @@ namespace APP_WPF_InstrumentControl
         {
             this.Close();
             AuthWindow window = new AuthWindow();
+
             window.ShowDialog();
             
+            
         }
+
+        
     }
 }

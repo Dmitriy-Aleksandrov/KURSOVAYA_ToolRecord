@@ -3,6 +3,8 @@
 общее представление: есть инструменты, лежащие в мастреской, их нужно учитывать в программе
 конкретная модель: в приложении можно зарегистрировать мастерскую, и в ней учитывать имеющиеся инструменты
 
+
+изучить создание бд внутренними средствами вс
 			БД:
 
 таблица Мастерские:
@@ -23,9 +25,11 @@
 
 
 
+					<add name="Tool_RecordEntities" connectionString="metadata=res://*/Model.Model1.csdl|res://*/Model.Model1.ssdl|res://*/Model.Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=WIN-SFDNI8LQ46Q;initial catalog=Tool_Record;integrated security=True;trustservercertificate=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" providerName="System.Data.EntityClient" />
 
 
-
+					string path = AppDomain.CurrentDomain.BaseDirectory;
+            AppDomain.CurrentDomain.SetData("DataDirectory", path);
 
 
 

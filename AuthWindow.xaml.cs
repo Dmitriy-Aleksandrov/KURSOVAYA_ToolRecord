@@ -94,6 +94,8 @@ namespace APP_WPF_InstrumentControl
                     addressname = CB_address.Text;
 
                     MessageBox.Show("Вы успешно авторизованы!");
+                    GD.CompName = compexis.Name;
+                    GD.CompINN = compexis.INN;
                     this.Close();
                     MainMenu auth = new MainMenu();
                     auth.ShowDialog();
