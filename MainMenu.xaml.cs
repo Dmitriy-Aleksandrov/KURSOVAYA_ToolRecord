@@ -34,7 +34,6 @@ namespace APP_WPF_InstrumentControl
         }
         private void FillDataList()
         {
-            //dataGridWorkouts.ItemsSource = null;
             try
             {
                 instrumentList = db.Instruments.Where(s => s.FirmId == GD.CompID && s.AddressId == GD.AddrID).ToList();
@@ -79,7 +78,7 @@ namespace APP_WPF_InstrumentControl
                 {
                     UpdatingInstrumentId = selectedInstrument.Id;
 
-                    TB_Name.Text = selectedInstrument.Name; //(int)selectedInstrument.Times;
+                    TB_Name.Text = selectedInstrument.Name;
                     TB_Category.Text = selectedInstrument.Category.ToString();
                     TB_Type.Text = selectedInstrument.Type.ToString();
                     TB_Index.Text = selectedInstrument.Index.ToString();
@@ -91,7 +90,6 @@ namespace APP_WPF_InstrumentControl
                 MessageBox.Show($"Исключение типа: {ex.Message}");
                 db = new Tool_RecordEntities();
             }
-            //как конвертировать переменную из типа  int? в int
 
         }
         private void ButtonDeleteInstrument_Click(object sender, RoutedEventArgs e)
@@ -117,7 +115,6 @@ namespace APP_WPF_InstrumentControl
 
         private void dataGridInstruments_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //не используется
             try
             {
                 FillDataList();
@@ -198,7 +195,6 @@ namespace APP_WPF_InstrumentControl
                 }
                 else
                 {
-
                     Instrument updatingInstrument = db.Instruments.FirstOrDefault(s => s.Id == UpdatingInstrumentId);
                     Instrument tool1 = updatingInstrument;
                     updatingInstrument.Name = TB_Name.Text;
@@ -212,8 +208,7 @@ namespace APP_WPF_InstrumentControl
                     ClearTextBox();
 
                     UpdatingInstrumentId = 0;
-
-                    MessageBox.Show("Упражнение изменено");
+                    MessageBox.Show("Инструмент изменен");
                 }
             }
             catch (Exception ex)

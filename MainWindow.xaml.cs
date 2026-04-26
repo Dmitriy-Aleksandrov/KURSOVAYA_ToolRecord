@@ -24,8 +24,7 @@ namespace APP_WPF_InstrumentControl
         {
             
             InitializeComponent();
-            MainMenu win = new MainMenu();
-            win.ShowDialog();
+            
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
@@ -37,9 +36,5 @@ namespace APP_WPF_InstrumentControl
             
         }
 
-        private void Button_ToolTipClosing(object sender, ToolTipEventArgs e)
-        {
-
-        }
     }
 }
