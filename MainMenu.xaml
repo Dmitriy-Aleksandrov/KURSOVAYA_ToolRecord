@@ -24,9 +24,18 @@
          AlternatingRowBackground="#F5F5F5"
          BorderBrush="Transparent"
          AutoGenerateColumns="False"
+         
          IsReadOnly="True" Margin="0,107,110,0" VerticalAlignment="Top" HorizontalAlignment="Right">
+            
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="24*" Foreground="#424242"/>
+                <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="24*" Foreground="#424242">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap"/>
+                            <Setter Property="MaxHeight" Value="60"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Категория" Binding="{Binding Category}" Width="24*"/>
                 <DataGridTextColumn Header="Тип инструмента" Binding="{Binding Type}" Width="24*"/>
                 <DataGridTextColumn Header="Инвентарный номер" Binding="{Binding Index}" Width="24*"/>
@@ -42,6 +51,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
             </DataGrid.Columns>
         </DataGrid>
 
